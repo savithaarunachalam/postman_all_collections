@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "1949d8af-39a5-4606-907f-2eb7d6ed4eba",
+		"name": "airline project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23215373"
+	},
+	"item": [
+		{
+			"name": "read all airlines",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const jsondata = pm.response.json();\r",
+							"var len = jsondata.length;\r",
+							"console.log(len)\r",
+							"for(var i=0;i<len;i++)\r",
+							"{\r",
+							"    var data =jsondata[i];\r",
+							"    console.log(data);\r",
+							"\r",
+							"    if(data.country==\"Dubai\")\r",
+							"    {\r",
+							"       console.log(data.country);\r",
+							"       var airlineid=data.id;\r",
+							"        console.log(airlineid);\r",
+							"        pm.environment.set(\"Airlineid\",data.id)\r",
+							"    }\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/v1/airlines",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"v1",
+						"airlines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create airline data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Eva Air \",\r\n    \"country\": \"Taiwan\",\r\n\"logo\":\"https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/EVA_Air_logo.svg/250px-EVA_Air_logo.svg.png\",\r\n    \"slogan\": \"Sharing the World, Flying Together\",\r\n    \"head_quaters\":\"376, Hsin-Nan Rd., Sec. 1, Luzhu, Taoyuan City, Taiwan\",\r\n    \"website\":  \"www.evaair.com\",\r\n    \"established\": \"1989\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/v1/airlines  ",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"v1",
+						"airlines  "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get airline by airline id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/v1/airlines/5",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"v1",
+						"airlines",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create passenger",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
